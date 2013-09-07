@@ -3,6 +3,9 @@
  *     VISUALIZER 1.3
  *        by Freaky
  *
+ *   Version 1.3b
+ *      - Fixed another lua error (Hopefully there are all gone now...)
+ *
  *   Version 1.3a
  *      - Fixed lua error (should work for TTT now)
  *
@@ -203,11 +206,13 @@ function PANEL:Setup(ply)
 end
 
 function PANEL:UpdatePast()
-    table.insert(self.Past, self.ply:VoiceVolume())
-    
-    local len = #self.Past
-    if len > (vv.BarCount-1) then
-        table.remove(self.Past, 1)
+    if self ~= nil and self:Valid() then
+        table.insert(self.Past, self.ply:VoiceVolume())
+        
+        local len = #self.Past
+        if len > (vv.BarCount-1) then
+            table.remove(self.Past, 1)
+        end
     end
 end 
 
